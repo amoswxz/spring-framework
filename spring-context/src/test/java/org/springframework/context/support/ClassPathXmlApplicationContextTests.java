@@ -75,9 +75,8 @@ public class ClassPathXmlApplicationContextTests {
 	@Test
 	public void testSingleConfigLocation() {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(FQ_SIMPLE_CONTEXT);
-        StaticMessageSource someMessageSource = (StaticMessageSource) ctx.getBean("someMessageSource");
-        System.out.println(someMessageSource.toString());
-        ctx.close();
+		assertTrue(ctx.containsBean("someMessageSource"));
+		ctx.close();
 	}
 
 	@Test
