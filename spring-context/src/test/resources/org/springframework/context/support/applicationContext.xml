@@ -19,10 +19,12 @@
   <!--</bean>-->
   <!--<bean id="test1" class="org.springframework.context.support.TestIocImpl1">-->
   <!--</bean>-->
-  <bean id="test3" class="org.springframework.context.support.TestIocImpl3" scope="singleton">
-  </bean>
+  <!--<bean id="test3" class="org.springframework.context.support.TestIocImpl3" >-->
+    <!--<constructor-arg name="testIocImpl4" ref="test4"></constructor-arg>-->
+  <!--</bean>-->
 
   <bean id="test4" class="org.springframework.context.support.TestIocImpl4">
+    <!--<constructor-arg name="testIocImpl3" ref="test3"></constructor-arg>-->
   </bean>
 
 

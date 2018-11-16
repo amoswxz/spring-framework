@@ -1071,6 +1071,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
      * @see #autowireConstructor
      * @see #instantiateBean
      */
+    //  Bean包含的Java对象的生成，有3种方法：工厂方法，构造器函数实例化，默认构造函数实例化（SimpleInstantiationStrategy提供了反射和CGLIB两种方式）
     protected BeanWrapper createBeanInstance(String beanName, RootBeanDefinition mbd, Object[] args) {
         // Make sure bean class is actually resolved at this point.
         // 先创建class对象，反射的套路。利用bean的class属性进行反射，所以class属性一定要是bean的实现类
@@ -1082,6 +1083,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
 
         if (mbd.getFactoryMethodName() != null) {
+            //使用工厂实例化
             return instantiateUsingFactoryMethod(beanName, mbd, args);
         }
 
@@ -1098,7 +1100,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
         if (resolved) {
             if (autowireNecessary) {
-                // autoWire创建 自动装配
+                // autoWire创建 自动装配 构造器注入
                 return autowireConstructor(beanName, mbd, null, null);
             } else {
                 // 普通创建
@@ -1153,18 +1155,20 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
      * @param mbd the bean definition for the bean
      * @return BeanWrapper for the new instance
      */
+    //使用默认的无参构造
     protected BeanWrapper instantiateBean(final String beanName, final RootBeanDefinition mbd) {
         try {
             Object beanInstance;
             final BeanFactory parent = this;
             if (System.getSecurityManager() != null) {
                 beanInstance = AccessController.doPrivileged(new PrivilegedAction<Object>() {
-                    @Override
-                    public Object run() {
-                        return getInstantiationStrategy().instantiate(mbd, beanName, parent);
-                    }
-                }, getAccessControlContext());
+                            @Override
+                            public Object run() {
+                                return getInstantiationStrategy().instantiate(mbd, beanName, parent);
+                            }
+                        }, getAccessControlContext());
             } else {
+                //使用默认的实例化策略，默认采用的是CglibSubclassingInstantiationStrategy，即CGLIB对Bean进行实例化
                 beanInstance = getInstantiationStrategy().instantiate(mbd, beanName, parent);
             }
             BeanWrapper bw = new BeanWrapperImpl(beanInstance);

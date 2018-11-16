@@ -11,24 +11,17 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * @author: Pimow
  **/
-public class TestIocImpl implements TestIoc  {
+public class TestIocImpl     {
 
 
     private String name;
-    private TestIoc1 testIoc1;
 
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public void setTestIoc1(TestIoc1 testIoc1) {
-        this.testIoc1 = testIoc1;
-    }
 
 
 

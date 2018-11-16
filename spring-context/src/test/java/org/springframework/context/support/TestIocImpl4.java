@@ -12,12 +12,21 @@ import org.springframework.beans.factory.config.InstantiationAwareBeanPostProces
 /**
  * @author: Pimow
  **/
-public class TestIocImpl4 implements BeanFactoryPostProcessor {
+public class TestIocImpl4 {
 
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        System.out.println("看看");
-    }
+//    private TestIocImpl3 testIocImpl3;
+//
+//    public TestIocImpl4(TestIocImpl3 testIocImpl3) {
+//        this.testIocImpl3 = testIocImpl3;
+//    }
+
+    //    public void setTestIocImpl3(TestIocImpl3 testIocImpl3) {
+//        this.testIocImpl3 = testIocImpl3;
+//    }
+    //    @Override
+//    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+//        System.out.println("看看");
+//    }
 
 //
 //    @Override

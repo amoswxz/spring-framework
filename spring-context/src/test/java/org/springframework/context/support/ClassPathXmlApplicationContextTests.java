@@ -78,9 +78,6 @@ public class ClassPathXmlApplicationContextTests {
     @Test
     public void testSingleConfigLocation() {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(PATH + "applicationContext.xml");
-        org.springframework.context
-                .support.TestIocImpl test = (org.springframework.context.support.TestIocImpl) ctx.getBean("test3");
-        System.out.println(test.getName());
         ctx.close();
     }
 

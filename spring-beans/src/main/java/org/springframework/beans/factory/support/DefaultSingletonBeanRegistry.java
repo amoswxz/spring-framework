@@ -285,7 +285,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
                     afterSingletonCreation(beanName);
                 }
                 if (newSingleton) {
-                    //创建成果以后放入三级缓存
+                    //创建成功以后放入三级缓存
                     addSingleton(beanName, singletonObject);
                 }
             }
