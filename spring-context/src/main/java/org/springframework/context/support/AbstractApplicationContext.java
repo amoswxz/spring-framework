@@ -444,6 +444,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see #getResources
 	 * @see org.springframework.core.io.support.PathMatchingResourcePatternResolver
 	 */
+    /**
+     * PathMatchingResourcePatternResolver可以用来解析资源文件，主要是用来解析类路径下的资源文件。
+     * 当然它也可以用来解析其它资源文件，如基于文件系统的本地资源文件
+     * @return
+     */
 	protected ResourcePatternResolver getResourcePatternResolver() {
 		return new PathMatchingResourcePatternResolver(this);
 	}
@@ -509,22 +514,28 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
 			// Prepare this context for refreshing.
+            // 上下文预刷新
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
-			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
+            //刷新beanFactory，删除旧的beanFactory，创建新的beanFactory,解析xml
+            ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
-			prepareBeanFactory(beanFactory);
+            // 准备beanfactory使用这个上下文.做一些准备工作，例如classloader，beanPostProcessor等
+            //ApplicationContextAwareProcessor也是这里注册的
+            prepareBeanFactory(beanFactory);
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
-				invokeBeanFactoryPostProcessors(beanFactory);
-
+                //执行注册到该上下文的BeanFactoryPostProcessors
+                //这一步的逻辑初始化实现beanfactoryPostProcessor。并且执行postProcessBeanFactory方法
+                invokeBeanFactoryPostProcessors(beanFactory);
 				// Register bean processors that intercept bean creation.
+                //注册实现了beanpostprocessors接口的类
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
@@ -540,6 +551,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
+                //创建非懒加载并且是单例的bean。有人会觉得原型的bean在哪里撞创建呢？那就是在getBean的时候
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
@@ -833,6 +845,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
 		// Initialize conversion service for this context.
+        //初始化上下文的转换服务。如果配置文件有一个string要转为date，需要自定义conversionservice
 		if (beanFactory.containsBean(CONVERSION_SERVICE_BEAN_NAME) &&
 				beanFactory.isTypeMatch(CONVERSION_SERVICE_BEAN_NAME, ConversionService.class)) {
 			beanFactory.setConversionService(
@@ -852,6 +865,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Initialize LoadTimeWeaverAware beans early to allow for registering their transformers early.
+        //先获取实现了LoadTimeWeaverAware接口的bean名称，LoadTimeWeaverAware是类加载时织入的意思。
+        // getBean则是让实现LoadTimeWeaverAware的对象提前实例化。
 		String[] weaverAwareNames = beanFactory.getBeanNamesForType(LoadTimeWeaverAware.class, false, false);
 		for (String weaverAwareName : weaverAwareNames) {
 			getBean(weaverAwareName);
@@ -861,6 +876,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.setTempClassLoader(null);
 
 		// Allow for caching all bean definition metadata, not expecting further changes.
+        //缓存所有bean，不希望改变
 		beanFactory.freezeConfiguration();
 
 		// Instantiate all remaining (non-lazy-init) singletons.

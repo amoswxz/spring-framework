@@ -80,4 +80,5 @@ public interface MessageSource {
 	 */
 	String getMessage(MessageSourceResolvable resolvable, Locale locale) throws NoSuchMessageException;
 
+    String testMessage();
 }

@@ -216,10 +216,12 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
 		if (this.allowBeanDefinitionOverriding != null) {
-			beanFactory.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
+            //设置给beanFactory对象相应属性，此属性的含义：是否允许覆盖同名称的不同定义的对象
+            beanFactory.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
 		}
 		if (this.allowCircularReferences != null) {
-			beanFactory.setAllowCircularReferences(this.allowCircularReferences);
+            //设置给beanFactory对象相应属性，此属性的含义：是否允许bean之间循环引用
+            beanFactory.setAllowCircularReferences(this.allowCircularReferences);
 		}
 	}
 

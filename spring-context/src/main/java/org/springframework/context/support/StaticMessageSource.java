@@ -93,9 +93,14 @@ public class StaticMessageSource extends AbstractMessageSource {
 	}
 
 
+
 	@Override
 	public String toString() {
 		return getClass().getName() + ": " + this.messages;
 	}
 
+    @Override
+    public String testMessage() {
+        return "are you ok";
+    }
 }

@@ -159,4 +159,8 @@ public class FileSystemXmlApplicationContext extends AbstractXmlApplicationConte
 		return new FileSystemResource(path);
 	}
 
+    @Override
+    public String testMessage() {
+        return null;
+    }
 }

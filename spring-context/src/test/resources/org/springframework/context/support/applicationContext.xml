@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!--<bean id="testService" class="com.amos.study.service.impl.TestServiceImpl" scope="prototype">-->
+  <!--<property name="testService1" ref="testService1"/>-->
+  <!--</bean>-->
+  <!--setter 注入-->
+  <!--<bean id="testService1" class="com.amos.study.service.impl.TestServiceImpl1" scope="prototype">-->
+  <!--<property name="testService" ref="testService"/>-->
+  <!--</bean>-->
+
+
+  <!--<bean id="test" class="org.springframework.context.support.TestIocImpl">-->
+    <!--<property name="name" value="zhangsan"></property>-->
+  <!--</bean>-->
+  <!--<bean id="test1" class="org.springframework.context.support.TestIocImpl1">-->
+  <!--</bean>-->
+  <bean id="test3" class="org.springframework.context.support.TestIocImpl3" scope="singleton">
+  </bean>
+
+  <bean id="test4" class="org.springframework.context.support.TestIocImpl4">
+  </bean>
+
+
+  <!--<bean name="testService1" class="com.amos.study.service.impl.TestServiceImpl1">-->
+  <!--<property name="name" value="zhangsan"></property>-->
+  <!--</bean>-->
+
+  <!--<bean id="testService" class="com.amos.study.service.impl.TestServiceImpl">-->
+  <!--</bean>-->
+
+  <!--<bean id="testService1" class="com.amos.study.service.impl.TestServiceImpl1">-->
+  <!--</bean>-->
+
+
+</beans>

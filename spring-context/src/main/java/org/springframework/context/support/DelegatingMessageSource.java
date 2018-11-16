@@ -85,4 +85,9 @@ public class DelegatingMessageSource extends MessageSourceSupport implements Hie
 		}
 	}
 
+    @Override
+    public String testMessage() {
+        return null;
+    }
+
 }

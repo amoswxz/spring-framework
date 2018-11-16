@@ -308,8 +308,13 @@ public class ResourceBundleMessageSource extends AbstractResourceBasedMessageSou
 		return getClass().getName() + ": basenames=" + getBasenameSet();
 	}
 
+    @Override
+    public String testMessage() {
+        return null;
+    }
 
-	/**
+
+    /**
 	 * Custom implementation of Java 6's {@code ResourceBundle.Control},
 	 * adding support for custom file encodings, deactivating the fallback to the
 	 * system locale and activating ResourceBundle's native cache, if desired.

@@ -539,8 +539,13 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 		return getClass().getName() + ": basenames=" + getBasenameSet();
 	}
 
+    @Override
+    public String testMessage() {
+        return null;
+    }
 
-	/**
+
+    /**
 	 * PropertiesHolder for caching.
 	 * Stores the last-modified timestamp of the source file for efficient
 	 * change detection, and the timestamp of the last refresh attempt

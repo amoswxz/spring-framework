@@ -203,4 +203,8 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 		return this.configResources;
 	}
 
+    @Override
+    public String testMessage() {
+        return null;
+    }
 }

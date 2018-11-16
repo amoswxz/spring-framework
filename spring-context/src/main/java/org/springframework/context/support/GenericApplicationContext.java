@@ -345,4 +345,8 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 		return this.beanFactory.isAlias(beanName);
 	}
 
+    @Override
+    public String testMessage() {
+        return null;
+    }
 }
