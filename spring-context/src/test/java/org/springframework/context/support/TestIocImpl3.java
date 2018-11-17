@@ -10,9 +10,9 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 public class TestIocImpl3 {
 
 
-    private TestIocImpl4 testIocImpl4;
-
-    public TestIocImpl3(TestIocImpl4 testIocImpl4) {
-        this.testIocImpl4 = testIocImpl4;
-    }
+//    private TestIocImpl4 testIocImpl4;
+//
+//    public TestIocImpl3(TestIocImpl4 testIocImpl4) {
+//        this.testIocImpl4 = testIocImpl4;
+//    }
 }

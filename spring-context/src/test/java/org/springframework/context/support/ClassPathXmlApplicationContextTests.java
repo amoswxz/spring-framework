@@ -78,6 +78,10 @@ public class ClassPathXmlApplicationContextTests {
     @Test
     public void testSingleConfigLocation() {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(PATH + "applicationContext.xml");
+        Object test3 = ctx.getBean("test3");
+        Object test31 = ctx.getBean("test3");
+        System.out.println(test3);
+        System.out.println(test31);
         ctx.close();
     }
 

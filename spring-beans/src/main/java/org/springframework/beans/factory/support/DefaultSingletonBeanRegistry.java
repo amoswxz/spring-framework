@@ -91,7 +91,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 
     /** Cache of early singleton objects: bean name --> bean instance */
     /**
-     * 提前曝光的单例对象
+     * 提前曝光的单例对象。实例化但是没有设置属性和初始化
      */
     private final Map<String, Object> earlySingletonObjects = new HashMap<String, Object>(16);
 
@@ -104,7 +104,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
     /**
      * Names of beans that are currently in creation
      */
-    private final Set<String> singletonsCurrentlyInCreation =
+    private final Set<String> /**/singletonsCurrentlyInCreation =
             Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>(16));
 
     /**

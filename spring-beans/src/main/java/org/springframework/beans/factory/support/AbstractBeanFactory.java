@@ -288,7 +288,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         } else {
             // Fail if we're already creating this bean instance:
             // We're assumably within a circular reference.
-            //如果正在创建该bean，抛出异常
+            //如果是原型正在创建该bean，抛出异常
             if (isPrototypeCurrentlyInCreation(beanName)) {
                 throw new BeanCurrentlyInCreationException(beanName);
             }
@@ -1049,8 +1049,10 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
      */
     @SuppressWarnings("unchecked")
     protected void beforePrototypeCreation(String beanName) {
+        //从threadlocal中获取
         Object curVal = this.prototypesCurrentlyInCreation.get();
         if (curVal == null) {
+            //放入threadlocal
             this.prototypesCurrentlyInCreation.set(beanName);
         } else if (curVal instanceof String) {
             Set<String> beanNameSet = new HashSet<String>(2);

@@ -548,6 +548,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             addSingletonFactory(beanName, new ObjectFactory<Object>() {
                 @Override
                 public Object getObject() throws BeansException {
+                    //用来扩展，可以得到早期曝光的引用。这个引用只是实例化好了，没有设置属性和初始化
                     return getEarlyBeanReference(beanName, mbd, bean);
                 }
             });
@@ -572,6 +573,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
 
         if (earlySingletonExposure) {
+            //是否允许从singletonFactories中通过getObject拿到对象
             Object earlySingletonReference = getSingleton(beanName, false);
             if (earlySingletonReference != null) {
                 if (exposedObject == bean) {
@@ -1074,20 +1076,21 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     //  Bean包含的Java对象的生成，有3种方法：工厂方法，构造器函数实例化，默认构造函数实例化（SimpleInstantiationStrategy提供了反射和CGLIB两种方式）
     protected BeanWrapper createBeanInstance(String beanName, RootBeanDefinition mbd, Object[] args) {
         // Make sure bean class is actually resolved at this point.
-        // 先创建class对象，反射的套路。利用bean的class属性进行反射，所以class属性一定要是bean的实现类
+        // 先创建class对象
         Class<?> beanClass = resolveBeanClass(mbd, beanName);
-        // class如果不是public的，则抛出异常。因为没法进行实例化
+        // class如果不是public的并且不允许非法访问，则抛出异常。因为没法进行实例化
         if (beanClass != null && !Modifier.isPublic(beanClass.getModifiers()) && !mbd.isNonPublicAccessAllowed()) {
             throw new BeanCreationException(mbd.getResourceDescription(), beanName,
                     "Bean class isn't public, and non-public access not allowed: " + beanClass.getName());
         }
 
         if (mbd.getFactoryMethodName() != null) {
-            //使用工厂实例化
+            //配置文件配置了factory-method，使用工厂实例化
             return instantiateUsingFactoryMethod(beanName, mbd, args);
         }
 
         // Shortcut when re-creating the same bean...
+        //如果已经解析过，则用缓存已解析的构造函数或工厂方法
         boolean resolved = false;
         boolean autowireNecessary = false;
         if (args == null) {
@@ -1107,13 +1110,13 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 return instantiateBean(beanName, mbd);
             }
         }
-
         // 有参数情况时，创建bean。先利用参数个数，类型等，确定最精确匹配的构造方法。
         // Need to determine the constructor...
         Constructor<?>[] ctors = determineConstructorsFromBeanPostProcessors(beanClass, beanName);
         if (ctors != null ||
                 mbd.getResolvedAutowireMode() == RootBeanDefinition.AUTOWIRE_CONSTRUCTOR ||
                 mbd.hasConstructorArgumentValues() || !ObjectUtils.isEmpty(args)) {
+            //有参构造
             return autowireConstructor(beanName, mbd, ctors, args);
         }
         // 有参数时，又没获取到构造方法，则只能调用无参构造方法来创建实例了(兜底方法)

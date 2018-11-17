@@ -12,13 +12,14 @@ import org.springframework.beans.factory.config.InstantiationAwareBeanPostProces
 /**
  * @author: Pimow
  **/
-public class TestIocImpl4 {
+ class TestIocImpl4 {
 
-//    private TestIocImpl3 testIocImpl3;
-//
-//    public TestIocImpl4(TestIocImpl3 testIocImpl3) {
-//        this.testIocImpl3 = testIocImpl3;
-//    }
+
+        private TestIocImpl3 testIocImpl3;
+
+    public TestIocImpl4(TestIocImpl3 testIocImpl3) {
+        this.testIocImpl3 = testIocImpl3;
+    }
 
     //    public void setTestIocImpl3(TestIocImpl3 testIocImpl3) {
 //        this.testIocImpl3 = testIocImpl3;
