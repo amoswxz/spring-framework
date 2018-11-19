@@ -39,6 +39,7 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.CannotLoadBeanClassException;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.ClassPathResource;
@@ -77,12 +78,7 @@ public class ClassPathXmlApplicationContextTests {
 
     @Test
     public void testSingleConfigLocation() {
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(PATH + "applicationContext.xml");
-        Object test3 = ctx.getBean("test3");
-        Object test31 = ctx.getBean("test3");
-        System.out.println(test3);
-        System.out.println(test31);
-        ctx.close();
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(PATH + "applicationContext.xml");
     }
 
     @Test
