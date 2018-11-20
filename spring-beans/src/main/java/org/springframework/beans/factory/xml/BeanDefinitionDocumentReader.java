@@ -37,6 +37,9 @@ import org.springframework.beans.factory.BeanDefinitionStoreException;
 public interface BeanDefinitionDocumentReader {
 
 	/**
+     * 该类的作用有两个，完成 BeanDefinition 的解析和注册
+     * 解析：其实是解析 Document 的内容并将其添加到 BeanDefinition 实例的过程。
+     * 注册：就是将 BeanDefinition 添加进 BeanDefinitionHolder 的过程，这样做的目的是保存它的信息。
 	 * Read bean definitions from the given DOM document and
 	 * register them with the registry in the given reader context.
 	 * @param doc the DOM document

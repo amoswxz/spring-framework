@@ -71,7 +71,8 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 	 */
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
-		return findParserForElement(element, parserContext).parse(element, parserContext);
+        // 获取当前标签使用的parser处理类。parse解析
+        return findParserForElement(element, parserContext).parse(element, parserContext);
 	}
 
 	/**

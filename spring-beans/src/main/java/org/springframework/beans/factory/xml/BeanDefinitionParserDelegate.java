@@ -1401,13 +1401,16 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	public BeanDefinition parseCustomElement(Element ele, BeanDefinition containingBd) {
-		String namespaceUri = getNamespaceURI(ele);
+        // 获取当前标签对应的命名空间指定的url
+	    String namespaceUri = getNamespaceURI(ele);
+	    //根据不同的命名空间获得不同的解析器
 		NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);
 		if (handler == null) {
 			error("Unable to locate Spring NamespaceHandler for XML schema namespace [" + namespaceUri + "]", ele);
 			return null;
 		}
-		return handler.parse(ele, new ParserContext(this.readerContext, this, containingBd));
+        //调用解析器的parse方法解析相应的标签
+        return handler.parse(ele, new ParserContext(this.readerContext, this, containingBd));
 	}
 
 	public BeanDefinitionHolder decorateBeanDefinitionIfRequired(Element ele, BeanDefinitionHolder definitionHolder) {
