@@ -38,6 +38,7 @@ import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.CannotLoadBeanClassException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -76,6 +77,7 @@ public class ClassPathXmlApplicationContextTests {
     private static final String TEST_PROPERTIES = "test.properties";
 
 
+    @Autowired
     @Test
     public void testSingleConfigLocation() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext(PATH + "applicationContext.xml");

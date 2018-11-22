@@ -1636,6 +1636,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object wrappedBean = bean;
         if (mbd == null || !mbd.isSynthetic()) {
             //这里很重要，applicationcontextaware也在里面set的
+            //@PostConstruct也是在这里面执行的
             wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
         }
 

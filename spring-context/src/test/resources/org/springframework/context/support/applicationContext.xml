@@ -7,17 +7,11 @@
 
 
   <context:component-scan base-package="org.springframework.context.support.test" />
-  <!--<bean id="testService" class="com.amos.study.service.impl.TestServiceImpl" scope="prototype">-->
-  <!--<property name="testService1" ref="testService1"/>-->
-  <!--</bean>-->
+
   <!--setter 注入-->
-  <!--<bean id="testService1" class="com.amos.study.service.impl.TestServiceImpl1" scope="prototype">-->
-  <!--<property name="testService" ref="testService"/>-->
-  <!--</bean>-->
 
 
-  <!--<bean id="test" class="org.springframework.context.support.TestIocImpl">-->
-  <!--<property name="name" value="zhangsan"></property>-->
+  <!--<bean id="test" class="org.springframework.context.support.test.TestIocImpl">-->
   <!--</bean>-->
   <!--<bean id="test1" class="org.springframework.context.support.TestIocImpl1">-->
   <!--</bean>-->

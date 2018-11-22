@@ -281,7 +281,9 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
                 }
                 if (resource.isReadable()) {
                     try {
+                        //会把类中的注解放入annptationSet集合
                         MetadataReader metadataReader = this.metadataReaderFactory.getMetadataReader(resource);
+                        //判断这个类是否有注解@component
                         if (isCandidateComponent(metadataReader)) {
                             ScannedGenericBeanDefinition sbd = new ScannedGenericBeanDefinition(metadataReader);
                             sbd.setResource(resource);

@@ -74,13 +74,13 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
         // 获取当前标签使用的parser处理类。parse解析
         return findParserForElement(element, parserContext).parse(element, parserContext);
 	}
-
 	/**
 	 * Locates the {@link BeanDefinitionParser} from the register implementations using
 	 * the local name of the supplied {@link Element}.
 	 */
 	private BeanDefinitionParser findParserForElement(Element element, ParserContext parserContext) {
-		String localName = parserContext.getDelegate().getLocalName(element);
+		//获取标签名获取注册的map
+	    String localName = parserContext.getDelegate().getLocalName(element);
 		BeanDefinitionParser parser = this.parsers.get(localName);
 		if (parser == null) {
 			parserContext.getReaderContext().fatal(

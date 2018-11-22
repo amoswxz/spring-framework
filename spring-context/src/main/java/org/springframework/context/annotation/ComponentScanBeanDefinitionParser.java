@@ -124,6 +124,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
                 ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
 
         // Actually scan for bean definitions and register them.
+        //扫描bean并注册它们
         ClassPathBeanDefinitionScanner scanner = configureScanner(parserContext, element);
         Set<BeanDefinitionHolder> beanDefinitions = scanner.doScan(basePackages);
         //注册其他注解的主键。比如AutowiredAnnotationBeanPostProcessor。多个BeanPostProcessor接口实现类
@@ -140,7 +141,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
         }
 
         // Delegate bean definition registration to scanner class.
-        //创建ClassPathBeanDefinitionScanner
+        //创建ClassPathBeanDefinitionScanner对象，用于组装需要扫描的注解
         // useDefaultFilters=true会给includeFilters添加则添加`@Component`、`@Service`、`@Controller`、`@Repository`、
         // `@ManagedBean`、`@Named`添加到includeFilters的集合过滤
         ClassPathBeanDefinitionScanner scanner = createScanner(parserContext.getReaderContext(), useDefaultFilters);
@@ -161,13 +162,13 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
         }
 
         try {
-            //
+            //配置元数据解析。scope-resolver，scoped-proxy
             parseScope(element, scanner);
         } catch (Exception ex) {
             parserContext.getReaderContext()
                     .error(ex.getMessage(), parserContext.extractSource(element), ex.getCause());
         }
-
+        //配置包含和不包含过滤器。excludeFilters,includeFilters
         parseTypeFilters(element, scanner, parserContext);
 
         return scanner;
