@@ -1084,9 +1084,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             throw new BeanCreationException(mbd.getResourceDescription(), beanName,
                     "Bean class isn't public, and non-public access not allowed: " + beanClass.getName());
         }
-
         if (mbd.getFactoryMethodName() != null) {
             //配置文件配置了factory-method，使用工厂实例化
+            //如果使用的是@bean就会走这里
             return instantiateUsingFactoryMethod(beanName, mbd, args);
         }
 

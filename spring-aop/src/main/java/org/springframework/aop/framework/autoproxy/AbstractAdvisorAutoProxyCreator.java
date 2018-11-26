@@ -89,7 +89,7 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 	    List<Advisor> candidateAdvisors = findCandidateAdvisors();
 	    //查找能代理的advisor
 		List<Advisor> eligibleAdvisors = findAdvisorsThatCanApply(candidateAdvisors, beanClass, beanName);
-		//这个里面加入拦截器chain
+		//这个里面加入拦截器chain ExposeInvocationInterceptor
 		extendAdvisors(eligibleAdvisors);
 		if (!eligibleAdvisors.isEmpty()) {
 			eligibleAdvisors = sortAdvisors(eligibleAdvisors);

@@ -435,6 +435,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 				public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
 					AnnotationAttributes ann = findAutowiredAnnotation(field);
 					if (ann != null) {
+					    //static 不能注入
 						if (Modifier.isStatic(field.getModifiers())) {
 							if (logger.isWarnEnabled()) {
 								logger.warn("Autowired annotation is not supported on static fields: " + field);

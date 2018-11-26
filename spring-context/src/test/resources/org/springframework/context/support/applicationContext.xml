@@ -8,14 +8,14 @@
 
 
   <context:component-scan base-package="org.springframework.context.support.test" />
-  <aop:aspectj-autoproxy/>
+  <!--<aop:aspectj-autoproxy />-->
   <!--setter 注入-->
 
 
   <!--<bean id="testIocImplA" class="org.springframework.context.support.test.ioc.impl.TestIocImplA" abstract="true">-->
   <!--</bean>-->
 
-  <bean id="testIocImplB" class="org.springframework.context.support.test.ioc.impl.TestIocImplB">
+  <bean id="testIocImplB" class="org.springframework.context.support.test.ioc.impl.TestIocImplB" >
   </bean>
 
   <!--<bean id="test4" class="org.springframework.context.support.TestIocImpl4" scope="prototype">-->

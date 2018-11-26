@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class TestAspect {
 
 
-    @Pointcut("execution(* org.springframework.context.support.test.ioc.*.*(..))")
+    @Pointcut("execution(* org.springframework.context.support.test.ioc.impl.*.*(..))")
     private void pointCutMethod() {
     }
 

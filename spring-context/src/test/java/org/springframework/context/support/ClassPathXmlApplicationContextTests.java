@@ -43,9 +43,6 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
-import org.springframework.context.support.test.ioc.TestIocD;
-import org.springframework.context.support.test.ioc.impl.TestIocImplB;
-import org.springframework.context.support.test.ioc.impl.TestIocImplD;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -83,11 +80,10 @@ public class ClassPathXmlApplicationContextTests {
     @Autowired
     @Test
     public void testSingleConfigLocation() {
-        System.out.println(Integer.MAX_VALUE);
         ApplicationContext ctx = new ClassPathXmlApplicationContext(PATH + "applicationContext.xml");
-        TestIocImplB testIocImplB = (TestIocImplB) ctx.getBean("testIocImplB");
-        TestIocD testIocD = (TestIocD) ctx.getBean("testIocImplD");
-        testIocD.test();
+//        TestIocImplD testIocD = (TestIocImplD) ctx.getBean("testIocImplD");
+//        TestIocImplE testIocImplE = (TestIocImplE) ctx.getBean("testIocImplE");
+        System.out.println(1);
     }
 
     @Test

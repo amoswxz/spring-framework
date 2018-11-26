@@ -211,6 +211,7 @@ class ConfigurationClassBeanDefinitionReader {
 		if (metadata.isStatic()) {
 			// static @Bean method
 			beanDef.setBeanClassName(configClass.getMetadata().getClassName());
+			//这里设置的factorymethodname
 			beanDef.setFactoryMethodName(methodName);
 		}
 		else {
@@ -248,7 +249,6 @@ class ConfigurationClassBeanDefinitionReader {
 				proxyMode = ScopedProxyMode.NO;
 			}
 		}
-
 		// Replace the original bean definition with the target one, if necessary
 		BeanDefinition beanDefToRegister = beanDef;
 		if (proxyMode != ScopedProxyMode.NO) {

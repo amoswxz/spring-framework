@@ -1,11 +1,12 @@
 package org.springframework.context.support.test.ioc.impl;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author: Pimow
  **/
-public class TestIocImplB {
+public class TestIocImplE {
+
 
 //    @Autowired
 //    private TestIocImplA testIocImplA;
@@ -14,13 +15,7 @@ public class TestIocImplB {
 //        this.testIocImpl4 = testIocImpl4;
 //    }
 
-    @Bean
-    public TestIocImplE testIocImplE() {
-        return new TestIocImplE();
-    }
-
-
-    public void test() {
+    public void test(){
         System.out.println("测试aop");
     }
 }

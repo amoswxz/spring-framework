@@ -431,8 +431,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
     private String[] doGetBeanNamesForType(ResolvableType type, boolean includeNonSingletons, boolean allowEagerInit) {
         List<String> result = new ArrayList<String>();
-
         // Check all bean definitions.
+        // 检查容器中所有的bean
         for (String beanName : this.beanDefinitionNames) {
             // Only consider bean as eligible if the bean name
             // is not defined as alias for some other bean.
@@ -1134,10 +1134,10 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
                 autowiredBeanName = entry.getKey();
                 instanceCandidate = entry.getValue();
             }
-
             if (autowiredBeanNames != null) {
                 autowiredBeanNames.add(autowiredBeanName);
             }
+            //这里@autowired依赖
             return (instanceCandidate instanceof Class ?
                     descriptor.resolveCandidate(autowiredBeanName, type, this) : instanceCandidate);
         } finally {

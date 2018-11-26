@@ -1,18 +1,19 @@
 package org.springframework.context.support.test.ioc.impl;
 
-import org.springframework.context.support.test.ioc.TestIocD;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * @author: Pimow
  **/
-@Service
-public class TestIocImplD implements TestIocD {
+//@Service
+public class TestIocImplD  {
 
 
-    @Override
+    @Autowired
+    private  TestIocImplB testIocImplB;
+
     public void test() {
-        System.out.println("测试aop");
     }
 
 }
