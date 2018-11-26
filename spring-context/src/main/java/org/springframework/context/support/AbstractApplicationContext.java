@@ -533,6 +533,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// Invoke factory processors registered as beans in the context.
                 //执行注册到该上下文的BeanFactoryPostProcessors
                 //这一步的逻辑初始化实现beanfactoryPostProcessor。并且执行postProcessBeanFactory方法
+                //ConfigurationClassPostProcessor这个先执行
                 invokeBeanFactoryPostProcessors(beanFactory);
 				// Register bean processors that intercept bean creation.
                 //注册实现了beanpostprocessors接口的类
@@ -555,6 +556,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
+                //最后一步发布事件
 				finishRefresh();
 			}
 

@@ -2,22 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+                           http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
   <context:component-scan base-package="org.springframework.context.support.test" />
-
+  <aop:aspectj-autoproxy/>
   <!--setter 注入-->
 
 
-  <!--<bean id="test" class="org.springframework.context.support.test.TestIocImpl">-->
+  <!--<bean id="testIocImplA" class="org.springframework.context.support.test.ioc.impl.TestIocImplA" abstract="true">-->
   <!--</bean>-->
-  <!--<bean id="test1" class="org.springframework.context.support.TestIocImpl1">-->
-  <!--</bean>-->
-  <!--<bean id="test3" class="org.springframework.context.support.TestIocImpl3">-->
-    <!--&lt;!&ndash;<constructor-arg name="testIocImpl4" ref="test4"/>&ndash;&gt;-->
-  <!--</bean>-->
+
+  <bean id="testIocImplB" class="org.springframework.context.support.test.ioc.impl.TestIocImplB">
+  </bean>
 
   <!--<bean id="test4" class="org.springframework.context.support.TestIocImpl4" scope="prototype">-->
     <!--<constructor-arg name="testIocImpl3" ref="test3"/>-->

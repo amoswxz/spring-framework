@@ -486,6 +486,7 @@ public abstract class ReflectionUtils {
 	 * @see #doWithMethods
 	 */
 	public static void doWithLocalMethods(Class<?> clazz, MethodCallback mc) {
+	    //获取所有方法
 		Method[] methods = getDeclaredMethods(clazz);
 		for (Method method : methods) {
 			try {
@@ -711,6 +712,7 @@ public abstract class ReflectionUtils {
 		Assert.notNull(clazz, "Class must not be null");
 		Field[] result = declaredFieldsCache.get(clazz);
 		if (result == null) {
+		    //反射获取到所有属性。放入map
 			result = clazz.getDeclaredFields();
 			declaredFieldsCache.put(clazz, (result.length == 0 ? NO_FIELDS : result));
 		}

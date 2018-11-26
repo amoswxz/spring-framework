@@ -44,7 +44,7 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 	private final AspectJAdvisorFactory advisorFactory;
 
 	private volatile List<String> aspectBeanNames;
-
+    //缓存切面类的注解，通知
 	private final Map<String, List<Advisor>> advisorsCache = new ConcurrentHashMap<String, List<Advisor>>();
 
 	private final Map<String, MetadataAwareAspectInstanceFactory> aspectFactoryCache =
@@ -80,8 +80,8 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 	 * @see #isEligibleBean
 	 */
 	public List<Advisor> buildAspectJAdvisors() {
+	    //获取切面bean
 		List<String> aspectNames = this.aspectBeanNames;
-
 		if (aspectNames == null) {
 			synchronized (this) {
 				aspectNames = this.aspectBeanNames;
@@ -91,7 +91,8 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 					String[] beanNames = BeanFactoryUtils.beanNamesForTypeIncludingAncestors(
 							this.beanFactory, Object.class, true, false);
 					for (String beanName : beanNames) {
-						if (!isEligibleBean(beanName)) {
+						//判断这个bean有没有被exclued排除
+					    if (!isEligibleBean(beanName)) {
 							continue;
 						}
 						// We must be careful not to instantiate beans eagerly as in this case they

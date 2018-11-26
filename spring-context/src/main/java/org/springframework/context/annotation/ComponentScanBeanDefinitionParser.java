@@ -65,7 +65,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
 
     /**
      * 是否启用默认配置,默认为”true”,该配置会在BeanDefinition注册到容器后自动注册一些BeanPostProcessors对象到容器中.这些处理器用来处理类中
-     *
+     * 是用于激活那些已经在spring容器里注册过的bean
      * @Required
      * @Autowired,
      * @PostConstruct,

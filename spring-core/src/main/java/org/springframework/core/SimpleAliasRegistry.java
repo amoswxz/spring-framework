@@ -38,6 +38,7 @@ import org.springframework.util.StringValueResolver;
 public class SimpleAliasRegistry implements AliasRegistry {
 
 	/** Map from alias to canonical name */
+	//别名隐射存储
 	private final Map<String, String> aliasMap = new ConcurrentHashMap<String, String>(16);
 
 

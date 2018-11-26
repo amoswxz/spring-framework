@@ -85,7 +85,6 @@ public class BeanNamePointcutAtAspectTests {
 
 		ITestBean proxyTestBean = factory.getProxy();
 
-		assertTrue("Expected a proxy", proxyTestBean instanceof Advised);
 		proxyTestBean.setAge(20);
 		assertEquals("Programmatically created proxy shouldn't match bean()", 0, myCounterAspect.count);
 	}
