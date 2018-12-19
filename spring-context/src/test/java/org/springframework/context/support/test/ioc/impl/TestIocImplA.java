@@ -1,18 +1,18 @@
 package org.springframework.context.support.test.ioc.impl;
 
-import javax.inject.Inject;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author: Pimow
  **/
-public abstract class TestIocImplA  {
+@Component
+@Transactional
+public class TestIocImplA {
 
-
-    @Inject
-    private TestIocImplB testIocImplB;
-
-
-
+    public void test() {
+        System.out.println("A");
+    }
 
 
 }

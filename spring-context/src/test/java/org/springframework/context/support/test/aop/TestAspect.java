@@ -34,13 +34,13 @@ public class TestAspect {
         System.out.println("后置通知");
         System.out.println("---" + result + "---");
     }
-//
-//    //声明异常通知
-//    @AfterThrowing(pointcut = "pointCutMethod()", throwing = "e")
-//    public void doAfterThrowing(Exception e) {
-//        System.out.println("声明异常通知");
-//        System.out.println(e.getMessage());
-//    }
+
+    //声明异常通知
+    @AfterThrowing(pointcut = "pointCutMethod()", throwing = "e")
+    public void doAfterThrowing(Exception e) {
+        System.out.println("声明异常通知");
+        System.out.println(e.getMessage());
+    }
 
     //声明最终通知
     @After("pointCutMethod()")

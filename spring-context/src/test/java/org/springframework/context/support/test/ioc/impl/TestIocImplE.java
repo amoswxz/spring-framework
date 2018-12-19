@@ -1,10 +1,11 @@
 package org.springframework.context.support.test.ioc.impl;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * @author: Pimow
  **/
+@Component
 public class TestIocImplE {
 
 
