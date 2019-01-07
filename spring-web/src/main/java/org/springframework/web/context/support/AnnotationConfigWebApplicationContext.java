@@ -277,4 +277,8 @@ public class AnnotationConfigWebApplicationContext extends AbstractRefreshableWe
 		return new ClassPathBeanDefinitionScanner(beanFactory, true, getEnvironment());
 	}
 
+    @Override
+    public String testMessage() {
+        return null;
+    }
 }

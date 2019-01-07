@@ -142,4 +142,8 @@ public class XmlWebApplicationContext extends AbstractRefreshableWebApplicationC
 		}
 	}
 
+    @Override
+    public String testMessage() {
+        return null;
+    }
 }

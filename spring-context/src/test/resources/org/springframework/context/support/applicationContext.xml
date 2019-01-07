@@ -13,8 +13,8 @@
   <tx:annotation-driven />
 
 
-  <!--<bean id="testIocImplA" class="org.springframework.context.support.test.ioc.impl.TestIocImplA" abstract="true">-->
-  <!--</bean>-->
+  <bean id="testIocImplA" class="org.springframework.context.support.test.ioc.impl.TestIocImplA" abstract="true">
+  </bean>
 
   <!--<bean id="testIocImplB" class="org.springframework.context.support.test.ioc.impl.TestIocImplB" >-->
   <!--</bean>-->

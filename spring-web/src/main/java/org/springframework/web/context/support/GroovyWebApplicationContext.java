@@ -179,4 +179,8 @@ public class GroovyWebApplicationContext extends AbstractRefreshableWebApplicati
 		throw new NoSuchBeanDefinitionException(property);
 	}
 
+    @Override
+    public String testMessage() {
+        return null;
+    }
 }
