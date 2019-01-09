@@ -44,7 +44,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.test.ioc.impl.TestIocImplA;
-import org.springframework.context.support.test.ioc.impl.TestIocImplE;
+import org.springframework.context.support.test.ioc.impl.TestIocImplC;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -85,8 +85,9 @@ public class ClassPathXmlApplicationContextTests {
         ApplicationContext ctx = new ClassPathXmlApplicationContext(PATH + "applicationContext.xml");
 //        TestIocImplD testIocD = (TestIocImplD) ctx.getBean("testIocImplD");
 //        TestIocImplE testIocImplE = (TestIocImplE) ctx.getBean("testIocImplE");
-        TestIocImplA testIocImplA = (TestIocImplA) ctx.getBean("testIocImplA");
-        System.out.println(1);
+        TestIocImplC testIocImplC = (TestIocImplC) ctx.getBean(TestIocImplC.class);
+        System.out.println(testIocImplC);
+        testIocImplC.testTranc();
     }
 
     @Test

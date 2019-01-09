@@ -416,7 +416,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     @Override
     public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
             throws BeansException {
-
+        //AnnotationAwareAspectJAutoProxyCreator 判断这个bean是否需要生成代理
         Object result = existingBean;
         for (BeanPostProcessor beanProcessor : getBeanPostProcessors()) {
             result = beanProcessor.postProcessAfterInitialization(result, beanName);
@@ -465,10 +465,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             throw new BeanDefinitionStoreException(mbdToUse.getResourceDescription(),
                     beanName, "Validation of method overrides failed", ex);
         }
-
         try {
             // Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
             //这里是把切面类放入advisedBeans,这里有可能生成代理。前提是bean我们有自定义的TargetSource
+            //如果类被标注了@Transactional
             Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
             if (bean != null) {
                 return bean;
@@ -1013,7 +1013,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     /**
      * Apply before-instantiation post-processors, resolving whether there is a before-instantiation shortcut for the
      * specified bean.
-     *
      * @param beanName the name of the bean
      * @param mbd the bean definition for the bean
      * @return the shortcut-determined bean instance, or {@code null} if none
@@ -1026,6 +1025,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
                 Class<?> targetType = determineTargetType(beanName, mbd);
                 if (targetType != null) {
+                    //AspectJAwareAdvisorAutoProxyCreator aop把切面类放入advisorbean
                     bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName);
                     if (bean != null) {
                         bean = applyBeanPostProcessorsAfterInitialization(bean, beanName);

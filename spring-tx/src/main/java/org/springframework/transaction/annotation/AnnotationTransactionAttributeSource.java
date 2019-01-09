@@ -84,7 +84,7 @@ public class AnnotationTransactionAttributeSource extends AbstractFallbackTransa
 	 * (typically used with AspectJ class weaving)
 	 */
 	public AnnotationTransactionAttributeSource(boolean publicMethodsOnly) {
-        System.out.println("aaaaaaaaaaaaaa");
+        System.out.println("这里是事务哟，兄弟要记清楚");
 		this.publicMethodsOnly = publicMethodsOnly;
 		this.annotationParsers = new LinkedHashSet<TransactionAnnotationParser>(2);
 		// @Transactional 注解解析器

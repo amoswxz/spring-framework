@@ -1,19 +1,13 @@
-package org.springframework.context.support.test.ioc.impl;
+package org.springframework.context.support.test.ioc;
 
 import javax.annotation.PostConstruct;
 
 /**
  * @author: Pimow
  **/
-public class TestIocImplA {
+public class TestIocImplAA {
 
 
-
-    private TestIocImplB testIocImplB;
-
-    public void setTestIocImplB(TestIocImplB testIocImplB) {
-        this.testIocImplB = testIocImplB;
-    }
 
     @PostConstruct
     public void init(){
@@ -21,7 +15,7 @@ public class TestIocImplA {
     }
 
     public void init1(){
-        System.out.println("init");
+        System.out.println("AAinit");
     }
 
 //    private TestIocImplD testIocImplD;

@@ -8,19 +8,27 @@
 
 
   <context:component-scan base-package="org.springframework.context.support.test" />
-  <!--<aop:aspectj-autoproxy />-->
-  <!--setter 注入-->
   <tx:annotation-driven />
 
 
-  <bean id="testIocImplA" class="org.springframework.context.support.test.ioc.impl.TestIocImplA" abstract="true">
+  <bean id="testIocImplA" class="org.springframework.context.support.test.ioc.impl.TestIocImplA" init-method="init1" >
+    <property name="testIocImplB" ref="testIocImplB"/>
   </bean>
+
+  <bean id="testIocImplB" class="org.springframework.context.support.test.ioc.impl.TestIocImplB" lazy-init="true" >
+  </bean>
+
+  <bean id="testIocImplAA" class="org.springframework.context.support.test.ioc.TestIocImplAA" init-method="init1" >
+  </bean>
+  <!--<bean id="testIocImplD" class="org.springframework.context.support.test.ioc.impl.TestIocImplD">-->
+    <!--<property name="testIocImplA" ref="testIocImplA"/>-->
+  <!--</bean>-->
 
   <!--<bean id="testIocImplB" class="org.springframework.context.support.test.ioc.impl.TestIocImplB" >-->
   <!--</bean>-->
 
   <!--<bean id="test4" class="org.springframework.context.support.TestIocImpl4" scope="prototype">-->
-    <!--<constructor-arg name="testIocImpl3" ref="test3"/>-->
+  <!--<constructor-arg name="testIocImpl3" ref="test3"/>-->
   <!--</bean>-->
 
 
