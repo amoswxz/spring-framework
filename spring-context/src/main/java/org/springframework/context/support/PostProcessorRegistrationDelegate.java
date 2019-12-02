@@ -104,6 +104,7 @@ class PostProcessorRegistrationDelegate {
             }
             sortPostProcessors(currentRegistryProcessors, beanFactory);
             registryProcessors.addAll(currentRegistryProcessors);
+            //这里很重要，这个里面就是去查找带有@controller @service @Repository @component @configuration
             invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
             currentRegistryProcessors.clear();
 
@@ -183,7 +184,7 @@ class PostProcessorRegistrationDelegate {
     }
 
     public static void registerBeanPostProcessors(
-            ConfigurableListableBeanFactory beanFactory, AbstractApplicationContext applicationContext) {
+            ConfigurableListableBeanFactory beanFactory, org.springframework.context.support.AbstractApplicationContext applicationContext) {
         //获取实现了BeanPostProcessor，允许非单例，
         String[] postProcessorNames = beanFactory.getBeanNamesForType(BeanPostProcessor.class, true, false);
 
@@ -252,7 +253,7 @@ class PostProcessorRegistrationDelegate {
 
         // Re-register post-processor for detecting inner beans as ApplicationListeners,
         // moving it to the end of the processor chain (for picking up proxies etc).
-        beanFactory.addBeanPostProcessor(new ApplicationListenerDetector(applicationContext));
+        beanFactory.addBeanPostProcessor(new org.springframework.context.support.ApplicationListenerDetector(applicationContext));
     }
 
     private static void sortPostProcessors(List<?> postProcessors, ConfigurableListableBeanFactory beanFactory) {
