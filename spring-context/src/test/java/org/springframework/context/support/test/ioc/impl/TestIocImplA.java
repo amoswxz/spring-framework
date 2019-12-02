@@ -1,38 +1,32 @@
 package org.springframework.context.support.test.ioc.impl;
 
-import javax.annotation.PostConstruct;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.stereotype.Service;
 
 /**
  * @author: Pimow
  **/
-public class TestIocImplA {
+@Service
+public class TestIocImplA implements ITestIocImplA {
 
-
-
-    private TestIocImplB testIocImplB;
-
-    public void setTestIocImplB(TestIocImplB testIocImplB) {
-        this.testIocImplB = testIocImplB;
-    }
-
-    @PostConstruct
-    public void init(){
-        System.out.println("postConstruct");
-    }
-
-    public void init1(){
-        System.out.println("init");
-    }
-
-//    private TestIocImplD testIocImplD;
+//    @Autowired
+//    private TestIocImplB testIocImplB;
 //
-//    public void setTestIocImplD(TestIocImplD testIocImplD) {
-//        this.testIocImplD = testIocImplD;
+////    private TestIocImplD testIocImplD;
+////
+////    public void setTestIocImplD(TestIocImplD testIocImplD) {
+////        this.testIocImplD = testIocImplD;
+////    }
+//
+//    public void test() {
+//        testIocImplB.test();
 //    }
 
+
+    @Override
     public void test() {
-        System.out.println("A");
+        System.out.println("testIocImplA");
     }
-
-
 }

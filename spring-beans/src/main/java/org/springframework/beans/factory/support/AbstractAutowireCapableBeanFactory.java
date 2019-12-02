@@ -416,7 +416,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     @Override
     public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
             throws BeansException {
-        //AnnotationAwareAspectJAutoProxyCreator 判断这个bean是否需要生成代理
+        //AnnotationAwareAspectJAutoProxyCreator AbstractAutoProxyCreator判断这个bean是否需要生成代理
         Object result = existingBean;
         for (BeanPostProcessor beanProcessor : getBeanPostProcessors()) {
             result = beanProcessor.postProcessAfterInitialization(result, beanName);
@@ -1638,7 +1638,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object wrappedBean = bean;
         if (mbd == null || !mbd.isSynthetic()) {
             //这里很重要，applicationcontextaware也在里面set的
-            //@PostConstruct也是在这里面执行的
+            //@PostConstruct也是在这里面执行的   这里面有ApplicationContextAwareProcessor
             wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
         }
 

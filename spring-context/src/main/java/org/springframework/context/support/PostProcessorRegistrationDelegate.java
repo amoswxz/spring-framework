@@ -174,7 +174,7 @@ class PostProcessorRegistrationDelegate {
         for (String postProcessorName : nonOrderedPostProcessorNames) {
             nonOrderedPostProcessors.add(beanFactory.getBean(postProcessorName, BeanFactoryPostProcessor.class));
         }
-        //这里执行方法postProcessBeanFactory
+        //这里执行方法BeanFactoryPostProcessor
         invokeBeanFactoryPostProcessors(nonOrderedPostProcessors, beanFactory);
 
         // Clear cached merged bean definitions since the post-processors might have

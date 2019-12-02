@@ -42,6 +42,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.inject.Provider;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.TypeConverter;
@@ -636,13 +637,13 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
      * Determine whether the specified bean definition qualifies as an autowire candidate, to be injected into other
      * beans which declare a dependency of matching type.
      *
-     * @param beanName the name of the bean definition to check
+     * @param beanName   the name of the bean definition to check
      * @param descriptor the descriptor of the dependency to resolve
-     * @param resolver the AutowireCandidateResolver to use for the actual resolution algorithm
+     * @param resolver   the AutowireCandidateResolver to use for the actual resolution algorithm
      * @return whether the bean should be considered as autowire candidate
      */
     protected boolean isAutowireCandidate(String beanName, DependencyDescriptor descriptor,
-            AutowireCandidateResolver resolver)
+                                          AutowireCandidateResolver resolver)
             throws NoSuchBeanDefinitionException {
 
         String beanDefinitionName = BeanFactoryUtils.transformedBeanName(beanName);
@@ -669,14 +670,14 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
      * Determine whether the specified bean definition qualifies as an autowire candidate, to be injected into other
      * beans which declare a dependency of matching type.
      *
-     * @param beanName the name of the bean definition to check
-     * @param mbd the merged bean definition to check
+     * @param beanName   the name of the bean definition to check
+     * @param mbd        the merged bean definition to check
      * @param descriptor the descriptor of the dependency to resolve
-     * @param resolver the AutowireCandidateResolver to use for the actual resolution algorithm
+     * @param resolver   the AutowireCandidateResolver to use for the actual resolution algorithm
      * @return whether the bean should be considered as autowire candidate
      */
     protected boolean isAutowireCandidate(String beanName, RootBeanDefinition mbd,
-            DependencyDescriptor descriptor, AutowireCandidateResolver resolver) {
+                                          DependencyDescriptor descriptor, AutowireCandidateResolver resolver) {
 
         String beanDefinitionName = BeanFactoryUtils.transformedBeanName(beanName);
         resolveBeanClass(mbd, beanDefinitionName);
@@ -757,7 +758,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
             if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
                 //不懂的同学先去看看FactoryBean 和 BeanFactory;FactoryBean前面会加一个&符号
                 //是否为FactoryBean,不是的话直接getBean(beanName)，也就是实例化
-                // 如果是FactoryBean，判断FactoryBean有没有额外的配置
+                // 如果是FactoryBean，判断FactoryBean有没有额外的配置区别：BeanFactory是个Factory，也就是IOC容器或对象工厂，FactoryBean是个Bean。
+                // 在Spring中，所有的Bean都是由BeanFactory(也就是IOC容器)来进行管理的。但对FactoryBean而言，这个Bean不是简单的Bean，
+                // 而是一个能生产或者修饰对象生成的工厂Bean,它的实现与设计模式中的工厂模式和修饰器模式类似
                 if (isFactoryBean(beanName)) {
                     final FactoryBean<?> factory = (FactoryBean<?>) getBean(FACTORY_BEAN_PREFIX + beanName);
                     boolean isEagerInit;
@@ -1054,7 +1057,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
     @Override
     public Object resolveDependency(DependencyDescriptor descriptor, String requestingBeanName,
-            Set<String> autowiredBeanNames, TypeConverter typeConverter) throws BeansException {
+                                    Set<String> autowiredBeanNames, TypeConverter typeConverter) throws BeansException {
 
         descriptor.initParameterNameDiscovery(getParameterNameDiscoverer());
         if (javaUtilOptionalClass == descriptor.getDependencyType()) {
@@ -1075,7 +1078,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     }
 
     public Object doResolveDependency(DependencyDescriptor descriptor, String beanName,
-            Set<String> autowiredBeanNames, TypeConverter typeConverter) throws BeansException {
+                                      Set<String> autowiredBeanNames, TypeConverter typeConverter) throws BeansException {
 
         InjectionPoint previousInjectionPoint = ConstructorResolver.setCurrentInjectionPoint(descriptor);
         try {
@@ -1146,7 +1149,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     }
 
     private Object resolveMultipleBeans(DependencyDescriptor descriptor, String beanName,
-            Set<String> autowiredBeanNames, TypeConverter typeConverter) {
+                                        Set<String> autowiredBeanNames, TypeConverter typeConverter) {
 
         Class<?> type = descriptor.getDependencyType();
         if (type.isArray()) {
@@ -1250,10 +1253,10 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     /**
      * Find bean instances that match the required type. Called during autowiring for the specified bean.
      *
-     * @param beanName the name of the bean that is about to be wired
+     * @param beanName     the name of the bean that is about to be wired
      * @param requiredType the actual type of bean to look for (may be an array component type or collection element
-     * type)
-     * @param descriptor the descriptor of the dependency to resolve
+     *                     type)
+     * @param descriptor   the descriptor of the dependency to resolve
      * @return a Map of candidate names and candidate instances that match the required type (never {@code null})
      * @throws BeansException in case of errors
      * @see #autowireByType
@@ -1308,7 +1311,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
      * initialization ahead of primary candidate selection.
      */
     private void addCandidateEntry(Map<String, Object> candidates, String candidateName,
-            DependencyDescriptor descriptor, Class<?> requiredType) {
+                                   DependencyDescriptor descriptor, Class<?> requiredType) {
 
         if (descriptor instanceof MultiElementDescriptor || containsSingleton(candidateName)) {
             candidates.put(candidateName, descriptor.resolveCandidate(candidateName, requiredType, this));
@@ -1322,7 +1325,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
      * <p>Looks for {@code @Primary} and {@code @Priority} (in that order).
      *
      * @param candidates a Map of candidate names and candidate instances that match the required type, as returned by
-     * {@link #findAutowireCandidates}
+     *                   {@link #findAutowireCandidates}
      * @param descriptor the target dependency to match against
      * @return the name of the autowire candidate, or {@code null} if none found
      */
@@ -1351,8 +1354,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     /**
      * Determine the primary candidate in the given set of beans.
      *
-     * @param candidates a Map of candidate names and candidate instances (or candidate classes if not created yet) that
-     * match the required type
+     * @param candidates   a Map of candidate names and candidate instances (or candidate classes if not created yet) that
+     *                     match the required type
      * @param requiredType the target dependency type to match against
      * @return the name of the primary candidate, or {@code null} if none found
      * @see #isPrimary(String, Object)
@@ -1385,8 +1388,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
      * <p>Based on {@code @javax.annotation.Priority}. As defined by the related
      * {@link org.springframework.core.Ordered} interface, the lowest value has the highest priority.
      *
-     * @param candidates a Map of candidate names and candidate instances (or candidate classes if not created yet) that
-     * match the required type
+     * @param candidates   a Map of candidate names and candidate instances (or candidate classes if not created yet) that
+     *                     match the required type
      * @param requiredType the target dependency type to match against
      * @return the name of the candidate with the highest priority, or {@code null} if none found
      * @see #getPriority(Object)
@@ -1420,7 +1423,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     /**
      * Return whether the bean definition for the given bean name has been marked as a primary bean.
      *
-     * @param beanName the name of the bean
+     * @param beanName     the name of the bean
      * @param beanInstance the corresponding bean instance (can be null)
      * @return whether the given bean qualifies as primary
      */

@@ -522,7 +522,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
             ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
-            // 准备beanfactory使用这个上下文.做一些准备工作，例如classloader，beanPostProcessor等
+            // 准备beanFactory使用这个上下文.做一些准备工作，例如classloader，beanPostProcessor等
             //ApplicationContextAwareProcessor也是这里注册的
             prepareBeanFactory(beanFactory);
 
@@ -531,13 +531,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
-                //执行注册到该上下文的BeanFactoryPostProcessors
-                //这一步的逻辑初始化实现beanfactoryPostProcessor。并且执行postProcessBeanFactory方法
+                //执行注册到该上下文的BeanFactoryPostProcessor
+                //这一步的逻辑初始化实现beanFactoryPostProcessor。并且执行postProcessBeanFactory方法
                 //ConfigurationClassPostProcessor这个先执行。然后根据我们自定义的bean查找@bean
                 //springboot 都是再里面初始化bean
                 invokeBeanFactoryPostProcessors(beanFactory);
 				// Register bean processors that intercept bean creation.
-                //注册实现了beanpostprocessors接口的类
+                //注册实现了x接口的类
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.

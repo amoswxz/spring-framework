@@ -16,22 +16,6 @@
 
 package org.springframework.context.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import org.junit.Test;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.TypeMismatchException;
@@ -40,17 +24,26 @@ import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.CannotLoadBeanClassException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
+import org.springframework.context.support.test.ioc.impl.ITestIocImplA;
 import org.springframework.context.support.test.ioc.impl.TestIocImplA;
-import org.springframework.context.support.test.ioc.impl.TestIocImplC;
+import org.springframework.context.support.test.ioc.impl.TestIocImplD;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.tests.sample.beans.ResourceTestBean;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ObjectUtils;
+
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.Assert.*;
+
+//import org.springframework.context.support.test.ioc.impl.TestIocImplC;
 
 /**
  * @author Juergen Hoeller
@@ -82,12 +75,12 @@ public class ClassPathXmlApplicationContextTests {
     @Autowired
     @Test
     public void testSingleConfigLocation() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext(PATH + "applicationContext.xml");
-//        TestIocImplD testIocD = (TestIocImplD) ctx.getBean("testIocImplD");
-//        TestIocImplE testIocImplE = (TestIocImplE) ctx.getBean("testIocImplE");
-        TestIocImplC testIocImplC = (TestIocImplC) ctx.getBean(TestIocImplC.class);
-        System.out.println(testIocImplC);
-        testIocImplC.testTranc();
+        AbstractApplicationContext ctx = new ClassPathXmlApplicationContext(PATH + "applicationContext.xml");
+        ITestIocImplA testIocImplA = (ITestIocImplA) ctx.getBean("testIocImplA");
+//        TestIocImplD testIocImplD = (TestIocImplD) ctx.getBean("testIocImplD");
+        testIocImplA.test();
+//        testIocImplD.test();
+        ctx.registerShutdownHook();
     }
 
     @Test
